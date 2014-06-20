@@ -55,6 +55,7 @@
     </Reference>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Content.Pipeline, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.TextureImporter, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="NAudio, Version=1.5.4.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -164,7 +165,10 @@
     </Compile>
     <Compile Include="AudioConverter.cs" />
     <Compile Include="ContentHelper.cs" />
+    <Compile Include="Content\ExtensionTextureContent.cs" />
     <Compile Include="Content\MGBitmapContent.cs" />
+    <Compile Include="Processors\ExtensionTextureImporter.cs" />
+    <Compile Include="Processors\ExtensionTextureProcessor.cs" />
     <Compile Include="Processors\MGEffectProcessor.cs" />
     <Compile Include="Processors\MGMaterialProcessor.cs" />
     <Compile Include="Processors\MGSongProcessor.cs" />
