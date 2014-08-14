@@ -55,10 +55,6 @@ namespace Microsoft.Xna.Framework.Graphics
 {
     public partial class Texture2D : Texture
     {
-		PixelInternalFormat glInternalFormat;
-		GLPixelFormat glFormat;
-		PixelType glType;
-
         private void PlatformConstruct(int width, int height, bool mipmap, SurfaceFormat format, SurfaceType type, bool shared)
         {
             this.glTarget = TextureTarget.Texture2D;
@@ -490,6 +486,7 @@ namespace Microsoft.Xna.Framework.Graphics
         }
 
 #if IOS
+        [CLSCompliant(false)]
         public static Texture2D FromStream(GraphicsDevice graphicsDevice, UIImage uiImage)
         {
             return PlatformFromStream(graphicsDevice, uiImage.CGImage);
@@ -506,6 +503,7 @@ namespace Microsoft.Xna.Framework.Graphics
 #endif
 
 #if IOS || MONOMAC
+        [CLSCompliant(false)]
         public static Texture2D PlatformFromStream(GraphicsDevice graphicsDevice, CGImage cgImage)
         {
             var width = cgImage.Width;
@@ -697,7 +695,7 @@ namespace Microsoft.Xna.Framework.Graphics
             GL.BindRenderbuffer(All.Renderbuffer, renderBufferID);
             GraphicsExtensions.CheckGLError();
 
-			var glDepthFormat = GraphicsCapabilities.SupportsDepth24 ? All.DepthComponent24Oes : GraphicsCapabilities.SupportsDepthNonLinear ? (OpenTK.Graphics.ES20.All)0x8E2C /*GLDepthComponent16NonLinear */: All.DepthComponent16;
+			var glDepthFormat = GraphicsDevice.GraphicsCapabilities.SupportsDepth24 ? All.DepthComponent24Oes : GraphicsDevice.GraphicsCapabilities.SupportsDepthNonLinear ? (OpenTK.Graphics.ES20.All)0x8E2C /*GLDepthComponent16NonLinear */: All.DepthComponent16;
 			GL.RenderbufferStorage(All.Renderbuffer, glDepthFormat, Width, Height);
             GraphicsExtensions.CheckGLError();
 
@@ -751,6 +749,6 @@ namespace Microsoft.Xna.Framework.Graphics
             return imageInfo;
 		}
 #endif
-	}
+    }
 }
 
