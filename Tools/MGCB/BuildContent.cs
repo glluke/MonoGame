@@ -221,6 +221,11 @@ namespace MGCB
             _manager.Logger = new ConsoleLogger();
             _manager.CompressContent = CompressContent;
 
+            // If the intent is to debug build, break at the original location
+            // of any exception, eg, within the actual importer/processor.
+            if (LaunchDebugger)
+                _manager.RethrowExceptions = false;
+
             // Feed all the assembly references to the pipeline manager
             // so it can resolve importers, processors, writers, and types.
             foreach (var r in References)
@@ -277,7 +282,7 @@ namespace MGCB
                 catch (InvalidContentException ex)
                 {
                     var message = string.Empty;
-                    if (!string.IsNullOrEmpty(ex.ContentIdentity.SourceFilename))
+                    if (ex.ContentIdentity != null && !string.IsNullOrEmpty(ex.ContentIdentity.SourceFilename))
                     {
                         message = ex.ContentIdentity.SourceFilename;
                         if (!string.IsNullOrEmpty(ex.ContentIdentity.FragmentIdentifier))
